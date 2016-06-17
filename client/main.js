@@ -3,25 +3,8 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 import './main.html';
 
-// Template.hello.onCreated(function helloOnCreated() {
-//   // counter starts at 0
-//   this.counter = new ReactiveVar(0);
-// });
-
-// Template.hello.helpers({
-//   counter() {
-//     return Template.instance().counter.get();
-//   },
-// });
-
-// Template.hello.events({
-//   'click button'(event, instance) {
-//     // increment the counter when button is clicked
-//     instance.counter.set(instance.counter.get() + 1);
-//   },
-// });
  var img_data = [{
-    img_src: 'http://prigorod77.ru/img/medal.png',
+    img_src: 'http://placekitten.com.s3.amazonaws.com/homepage-samples/200/287.jpg',
     img_alt: 'laptops'
  },
  {
@@ -34,3 +17,11 @@ import './main.html';
  }];
 
 Template.images.helpers({images: img_data});
+
+Template.images.events({
+  'click .js-image': function(event) {
+    $(event.target).css({
+      width: '50px'
+    });
+  }
+});
