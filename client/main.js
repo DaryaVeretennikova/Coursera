@@ -3,6 +3,9 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 import './main.html';
 
+Images = new Mongo.Collection('images');
+console.log(Images.find().count());
+
  var img_data = [{
     img_src: 'http://placekitten.com.s3.amazonaws.com/homepage-samples/200/287.jpg',
     img_alt: 'laptops'
