@@ -3,9 +3,12 @@
 </head>
 
 <body>
-    <h1>Welcome to Meteor!</h1>
+    {{> image_add_form}}
     <div class="container">
-        {{> image_add_form}} {{> images}}
+        <h1>Welcome to image share!</h1>
+        {{> loginButtons}}
+        <br><br>
+        {{> images}}
     </div>
 </body>
 <template name="image_add_form">
