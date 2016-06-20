@@ -4,10 +4,15 @@
 
 <body>
     {{> image_add_form}}
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-center">
+          {{> loginButtons}}
+        </div>
+      </div>
+    </nav>
     <div class="container">
         <h1>Welcome to image share!</h1>
-        {{> loginButtons}}
-        <br><br>
         {{> images}}
     </div>
 </body>
@@ -39,7 +44,7 @@
         {{#each images}}
         <div class="col-sm-6 col-md-4" id="{{_id}}">
             <div class="thumbnail">
-                <img src="{{img_src}}" alt="{{img_alt}}" class="js-image">
+                <img src="{{img_src}}" alt="{{img_alt}}" class="thumbnail-img js-image">
                 <div class="caption">
                     <h3>Thumbnail label</h3>
                     <p>{{img_alt}}</p>
