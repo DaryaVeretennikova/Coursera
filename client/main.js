@@ -5,9 +5,32 @@ import './main.html';
 
 Images = new Mongo.Collection('images');
 
+Accounts.ui.config({
+  passwordSignupFields: 'USERNAME_AND_EMAIL'
+});
+
 Template.images.helpers({
   images:
-    Images.find({}, {sort:{createdOn: -1, rating:-1}})
+    Images.find({}, {sort:{createdOn: -1, rating:-1}}),
+    getUser: function (user_id){
+      var user = Meteor.users.findOne({_id: user_id});
+
+      if (user) {
+        return user.username;
+      } else {
+        return 'anonymous';
+      }
+    }
+});
+
+Template.body.helpers({
+  username: function() {
+    if (Meteor.user()) {
+      return Meteor.user().username;
+    } else {
+      return 'anonymous';
+    }
+  }
 });
 
 Template.images.events({
@@ -40,11 +63,14 @@ Template.image_add_form.events({
         img_src = event.target.img_src.value;
         img_alt = event.target.img_alt.value;
 
-        Images.insert({
-            img_src: img_src,
-            img_alt: img_alt,
-            createdOn: new Date()
-        });
+        if (Meteor.user()) {
+          Images.insert({
+              img_src: img_src,
+              img_alt: img_alt,
+              createdOn: new Date(),
+              createdBy: Meteor.user()._id
+          });
+        }
 
         $('#image_add_form').modal('hide');
 
