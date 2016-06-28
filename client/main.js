@@ -10,18 +10,40 @@ Accounts.ui.config({
 });
 
 Template.images.helpers({
-  images:
-    Images.find({}, {sort:{createdOn: -1, rating:-1}}),
-    getUser: function (user_id){
-      var user = Meteor.users.findOne({_id: user_id});
-
-      if (user) {
-        return user.username;
+    images: function() {
+      if (Session.get('userFilter')) {
+        return Images.find({createdBy: Session.get('userFilter')}, { sort: { createdOn: -1, rating: -1 } });
       } else {
-        return 'anonymous';
+        return Images.find({}, { sort: { createdOn: -1, rating: -1 } });
       }
+    },
+
+    getUser: function(user_id) {
+        var user = Meteor.users.findOne({ _id: user_id });
+
+        if (user) {
+            return user.username;
+        } else {
+            return 'anonymous';
+        }
+    },
+    getFilterUser: function() {
+        if (Session.get('userFilter')) {
+           var user = Meteor.users.findOne({ _id: Session.get('userFilter') });
+          return user.username;
+         } else {
+          return false;
+         }
+    },
+    filtering_images: function() {
+       if (Session.get('userFilter')) {
+        return true;
+       } else {
+        return false;
+       }
     }
 });
+
 
 Template.body.helpers({
   username: function() {
@@ -52,6 +74,12 @@ Template.images.events({
   },
   'click .js-show-image-form': function(e) {
     $('#image_add_form').modal('show');
+  },
+  'click .js-set-image-filter': function(e) {
+    Session.set('userFilter', this.createdBy);
+  },
+  'click .js-unset-image-filter': function(e) {
+      Session.set('userFilter', undefined);
   }
 });
 
