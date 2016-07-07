@@ -1,7 +1,5 @@
 import { Meteor } from 'meteor/meteor';
 
-Images = new Mongo.Collection('images');
-
 Meteor.startup(() => {
   console.log(Images.find().count());
   if (Images.find().count() === 0) {
