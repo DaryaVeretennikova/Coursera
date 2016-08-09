@@ -13,15 +13,15 @@ Template.editor.helpers({
     } else {
       return undefined;
     }
+  },
+  config: function() {
+    return function(editor) {
+      editor.on('change', function(cm_editor, info) {
+        $('#viewer_iframe')
+          .contents()
+          .find('html')
+          .html(cm_editor.getValue());
+      });
+    };
   }
 });
-
-Template.date_display.helpers({
-  current_date: function() {
-    return Session.get('current_date');
-  }
-});
-
-Meteor.setInterval(function() {
-  Session.set('current_date', new Date());
-}, 1000);
