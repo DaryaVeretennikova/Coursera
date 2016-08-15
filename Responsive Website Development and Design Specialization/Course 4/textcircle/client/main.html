@@ -6,6 +6,7 @@
   <nav class="navbar navbar-inverse">
     <div class="container">
         <a class="navbar-brand" href="/">TextCircle</a>
+        <div class="navbar-text navbar-right">{{> loginButtons align="right"}}</div>        
       </div>
   </nav>
   <div class="container">
@@ -21,7 +22,7 @@
 </body>
 
 <template name="editor">
-  {{>sharejsCM docid=docid onRender=config id="editor"}}
+  {{> sharejsCM docid=docid onRender=config id="editor"}}
 </template>
 
 <template name="viewer">
