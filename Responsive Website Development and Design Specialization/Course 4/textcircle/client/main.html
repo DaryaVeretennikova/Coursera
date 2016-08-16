@@ -6,10 +6,15 @@
   <nav class="navbar navbar-inverse">
     <div class="container">
         <a class="navbar-brand" href="/">TextCircle</a>
-        <div class="navbar-text navbar-right">{{> loginButtons align="right"}}</div>        
+        <div class="navbar-text navbar-right">{{> loginButtons align="right"}}</div>
       </div>
   </nav>
   <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        {{> editingUsers}}
+      </div>
+    </div>
     <div class="row">
       <div class="col-xs-12 col-md-6">
         {{> editor}}
@@ -29,4 +34,13 @@
   <iframe src="" frameborder="0" id="viewer_iframe">
 
   </iframe>
+</template>
+
+<template name="editingUsers">
+  Editors: 
+  {{#each users}}
+  <span class="label label-success">
+    {{lastEdit}}
+  </span>
+  {{/each}}
 </template>
